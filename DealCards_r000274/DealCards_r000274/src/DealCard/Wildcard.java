@@ -17,13 +17,4 @@ public class Wildcard extends Card {
         this.secondCardColor = secondCardColor;
     }
 
-    /**
-     * Retrieves the secondary card color.
-     *
-     * @return the secondary card color
-     */
-    public CardColor getSecondCardColor() {
-        return secondCardColor;
-    }
 }
-
