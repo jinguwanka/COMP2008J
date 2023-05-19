@@ -1,13 +1,16 @@
 package DealCard;
 
-public class MoneyCard extends Card {
+public class MoneyCard extends Card{
 
-	public MoneyCard(int value, int maxNum) {
+	public MoneyCard( int value, int maxNum) {
 		super(null, value, maxNum);
+		// TODO Auto-generated constructor stub
 	}
-
+	
 	@Override
 	public String imageString() {
-		return "MoneyCards/" + value + ".jpg";
+		// TODO Auto-generated method stub
+		return "MoneyCards/"+value+".jpg";
 	}
+
 }
