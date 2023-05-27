@@ -32,16 +32,5 @@ public class BankPanel extends JPanel {
         add(scrollPane);
     }
 
-    public void displayBankCards(List<Card> cards) {
-        cardPanel.removeAll();
 
-        for (Card card : cards) {
-            ImagePanel imagePanel = new ImagePanel(card.getImageString());
-            cardPanel.add(imagePanel);
-        }
-
-        revalidate();
-        repaint();
-    }
 }
-

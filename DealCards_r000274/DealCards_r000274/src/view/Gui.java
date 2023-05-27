@@ -76,27 +76,6 @@ public class Gui extends JFrame {
         panelMain.setLayout(new BoxLayout(panelMain, BoxLayout.Y_AXIS));
     }
 
-    public void addPlayer(Player player) {
-        PlayerPanel panel = new PlayerPanel(player);
-        observer.add(player, panel.getInfJLabel());
-        player.setObserver(observer);
-        panelMain.add(panel);
-        playerPanels.add(panel);
-    }
 
-    public void displayPlayerPanels() {
-        for (PlayerPanel playerPanel : playerPanels) {
-            playerPanel.display();
-            playerPanel.repaint();
-        }
-    }
-
-    public void setRubbishImage(String imageString) {
-        if (imageString == null) {
-            return;
-        }
-        rubbishPanel.setImageString(imageString);
-        rubbishPanel.repaint();
-    }
 
 }

@@ -23,25 +23,5 @@ public class HandPanel extends JPanel {
         setLayout(new FlowLayout(FlowLayout.LEFT));
     }
 
-    public void displayActionCards(List<Card> cards) {
-        removeAll();
 
-        for (Card card : cards) {
-            String imagePath = card.getImageString();
-
-            if (player instanceof Cpu) {
-                imagePath = "back/back.jpg";
-            }
-
-            ImagePanel imagePanel = new ImagePanel(imagePath);
-            add(imagePanel);
-        }
-
-        int cardCount = cards.size();
-        int preferredWidth = player instanceof Cpu ? cardCount * 20 : cardCount * 80;
-        setPreferredSize(new Dimension(preferredWidth, 120));
-
-        revalidate();
-        repaint();
-    }
 }
