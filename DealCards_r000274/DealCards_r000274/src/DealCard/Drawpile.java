@@ -24,10 +24,6 @@ public class Drawpile {
 		cards.addAll(CardFactory.createCards("moneycard"));
 	}
 
-	private void shuffleCards() {
-		Collections.shuffle(cards);
-	}
-
 	public Card popCard() {
 		if (cards.isEmpty()) {
 			return null;
@@ -39,6 +35,7 @@ public class Drawpile {
 		cards.add(card);
 	}
 
+
 	public Card getRubbishPeek() {
 		if (rubbishCards.isEmpty()) {
 			return null;
@@ -49,4 +46,8 @@ public class Drawpile {
 	public void addRubbish(Card card) {
 		rubbishCards.add(0, card);
 	}
+
+
+
+
 }

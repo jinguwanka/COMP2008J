@@ -20,14 +20,14 @@ public class Card {
     public CardColor getCardColor() {
         return cardColor;
     }
-
+    public int getMaxNum() {
+        return maxNum;
+    }
     public int getValue() {
         return value;
     }
 
-    public int getMaxNum() {
-        return maxNum;
-    }
+
 
     @Override
     public String toString() {
