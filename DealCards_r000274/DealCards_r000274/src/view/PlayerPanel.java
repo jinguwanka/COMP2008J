@@ -1,10 +1,16 @@
 package view;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import DealCard.Cpu;
 import DealCard.Player;
+
+import java.awt.Button;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import javax.swing.JScrollPane;
 
 public class PlayerPanel extends JPanel {
 
@@ -34,5 +40,11 @@ public class PlayerPanel extends JPanel {
 
     private void displayActionCards() {
         handPanel.displayActionCards(player.getPlayPile().getActionCards());
+    }
+    public void display() {
+        bankPanel.displayBankCards(player.getBank().getCards());
+        handPanel.displayActionCards(player.getPlayPile().getActionCards());
+        propertyPanel.displayProperty(player.propertyCards());
+        repaint();
     }
 }

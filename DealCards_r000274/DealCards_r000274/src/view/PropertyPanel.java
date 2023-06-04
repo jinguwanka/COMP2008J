@@ -30,12 +30,6 @@ public class PropertyPanel extends JPanel {
             }
         }
 
-        int propertyCount = propertyCards.size();
-        int preferredWidth = propertyCount * 100;
-        int preferredHeight = cards.size() * 30;
-        setPreferredSize(new Dimension(preferredWidth, preferredHeight));
 
-        revalidate();
-        repaint();
     }
 }
