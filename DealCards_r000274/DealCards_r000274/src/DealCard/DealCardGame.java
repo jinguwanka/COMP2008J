@@ -1,4 +1,5 @@
 package DealCard;
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,7 +23,23 @@ public class DealCardGame {
 		players = new ArrayList<>();
 		drawpile = new Drawpile();
 	}
+	public void turn() {
+		if (players.get(currentPlayerIdx).iswin()) {
+			JOptionPane.showMessageDialog(null, String.format("%s win", players.get(currentPlayerIdx).getName()));
+			return;
+		}
+		currentPlayerIdx++;
+		currentPlayerIdx%=playerNum;
+		Player player=players.get(currentPlayerIdx);
+		if (player instanceof Cpu) {
+			player.action();
 
+		}else {
+			players.get(currentPlayerIdx).getCardsFromDrawpile();
+			players.get(currentPlayerIdx).displayCards();
+		}
+
+	}
 	private void distribute() {
 		int cardsToDistribute = 5 * players.size();
 		for (int i = 0; i < cardsToDistribute; i++) {
@@ -33,25 +50,34 @@ public class DealCardGame {
 
 	public void setPlayerNum(int playerNum) {
 		this.playerNum = playerNum;
-		for (int i = 0; i < playerNum - 1; i++) {
-			players.add(new Cpu("Cpu" + i));
+		for (int i = 0; i <playerNum-1; i++) {
+			players.add(new Cpu("Cpu"+i));
 		}
 		players.add(new Player("Player"));
+		for (Player player : players) {
+			player.setPlayers(players);
+			player.setDealCardGame(this);
+		}
+		currentPlayerIdx=players.size()-1;
+
 		distribute();
+		players.get(currentPlayerIdx).getCardsFromDrawpile();
 	}
 
 	public List<Player> getPlayers() {
 		return players;
 	}
 
+
 	public void run() {
-		Scanner scanner = new Scanner(System.in);
-		// 添加游戏逻辑代码
+		Scanner scanner=new Scanner(System.in);
+
+
 	}
+
 
 	public static void main(String[] args) {
-		DealCardGame dealCardGame = DealCardGame.getInstance();
-		// 添加游戏启动逻辑代码
-	}
+		DealCardGame dealCardGame=new DealCardGame();
 
+	}
 }
