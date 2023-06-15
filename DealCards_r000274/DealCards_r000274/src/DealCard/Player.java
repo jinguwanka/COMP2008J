@@ -5,16 +5,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 import view.Gui;
 import view.PlayerPanel;
 
 public class Player {
 	
-	private Bank bank=new Bank();
+	public Bank bank=new Bank();
 	protected PlayPile playPile=new PlayPile();
 	private Map<CardColor, PropertyCards> propertyMap=new LinkedHashMap<>();
 	private List<Wildcard> wildcards=new ArrayList<>();
-	private List<Player> players;
+	public List<Player> players;
 	
 	public DealCardGame dealCardGame;
 	private PlayerPanel playerPanel;
@@ -27,6 +29,11 @@ public class Player {
 		// TODO Auto-generated constructor stub
 		this.name=name;
 		
+	}
+	
+	public void putInBank(Card card) {
+		bank.add(card);
+		displayCards();
 	}
 	
 	public void setObserver(Observer observer) {
@@ -45,7 +52,10 @@ public class Player {
 		Random random=new Random();
 		ArrayList<Player> arrayList=new ArrayList<>(players);
 		arrayList.remove(this);
-		return arrayList.get(random.nextInt(arrayList.size()));
+		String[] playerStrings=new String[] {arrayList.get(0).name,arrayList.get(1).name,arrayList.get(2).name};
+		int res=JOptionPane.showOptionDialog(null, "selecting a player", "Players dialog", 
+				JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, playerStrings, playerStrings[0]);
+		return arrayList.get(res);
 	}
 	
 	public PropertyCards getPropertyCards(Card card) {
@@ -125,6 +135,9 @@ public class Player {
 				break;
 			}
 		}
+		if (observer==null) {
+			return;
+		}
 		observer.update(this, String.format(" %s slydeal for %s", card.getName(),player.getName()));
 	}
 	
@@ -138,7 +151,9 @@ public class Player {
 		PropertyCards propertyCards2=getPropertyMap().remove(arrayList2.get(random.nextInt(arrayList2.size())));
 		player.getPropertyMap().put(propertyCards2.getCardColor(), propertyCards2);
 		getPropertyMap().put(propertyCards.getCardColor(), propertyCards);
-		
+		if (observer==null) {
+			return;
+		}
 		observer.update(this, String.format(" %s forcedeal for %s", card.getName(),player.getName()));
 	}
 	
@@ -147,6 +162,9 @@ public class Player {
 		List<Card> cards=player.getBank().getMoney(5);
 		for (Card card2 : cards) {
 			addCard(card2);
+		}
+		if (observer==null) {
+			return;
 		}
 		observer.update(this, String.format(" %s debtcollector for %s", card.getName(),player.getName()));
 	}
@@ -161,6 +179,9 @@ public class Player {
 			for (Card card1:list) {
 				addCard(card1);
 			}
+		}
+		if (observer==null) {
+			return;
 		}
 		observer.update(this, String.format(" %s forcedeal for %s", card.getName(),"All players"));
 	}
@@ -202,8 +223,14 @@ public class Player {
 	
 	public void nextPlayer() {
 		dealCardGame.turn();
+		if (playerPanel==null) {
+			return;
+		}
 		playerPanel.display();
 		if (dealCardGame.getDrawpile().getRubbishPeek()==null) {
+			return;
+		}
+		if (gui==null) {
 			return;
 		}
 		gui.setRubbishImage(dealCardGame.getDrawpile().getRubbishPeek().imageString());
@@ -234,6 +261,9 @@ public class Player {
 	}
 	
 	public void displayCards() {
+		if (gui==null) {
+			return;
+		}
 		gui.displayPlayerPanels();
 		
 		if (dealCardGame.getDrawpile().getRubbishPeek()==null) {

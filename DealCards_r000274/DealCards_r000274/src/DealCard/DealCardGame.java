@@ -46,6 +46,10 @@ public class DealCardGame {
 		
 	}
 	
+	public Player currentPlayer() {
+		return players.get(currentPlayerIdx);
+	}
+	
 	public Drawpile getDrawpile() {
 		return drawpile;
 	}
@@ -61,6 +65,7 @@ public class DealCardGame {
 	}
 	
 	public void setPlayerNum(int playerNum) {
+		players.clear();
 		this.playerNum = playerNum;
 		for (int i = 0; i <playerNum-1; i++) {
 			players.add(new Cpu("Cpu"+i));
@@ -81,15 +86,5 @@ public class DealCardGame {
 	}
 	
 	
-	public void run() {
-		Scanner scanner=new Scanner(System.in);
-		
-		
-	}
-
 	
-	public static void main(String[] args) {
-		DealCardGame dealCardGame=new DealCardGame();
-		
-	}
 }

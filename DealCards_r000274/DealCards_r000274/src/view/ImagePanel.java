@@ -9,6 +9,10 @@ import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageInputStream;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+
+import DealCard.ActionCard;
+import DealCard.Card;
+
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -18,12 +22,14 @@ import javax.swing.JMenuItem;
 public class ImagePanel extends JPanel {
 	
 	private Image image;
+	private Card card;
 
 	/**
 	 * Create the panel.
 	 */
 	private JPopupMenu popupMenu = new JPopupMenu();
 	private JMenuItem mntmNewMenuItem = new JMenuItem("DealCard");
+	private JMenuItem putbankItem=new JMenuItem("Put in bank");
 	public ImagePanel(String imageString) {
 		setSize(80, 120);
 		
@@ -48,12 +54,23 @@ public class ImagePanel extends JPanel {
 
 	}
 	
+	public void setCard(Card card) {
+		this.card = card;
+	}
+	
 	public void displayPopMenu() {
 		addPopup(this, popupMenu);
+		if (card instanceof ActionCard) {
+			popupMenu.add(putbankItem);
+		}
 	}
 	
 	public void addMenuAction(ActionListener actionListener) {
 		mntmNewMenuItem.addActionListener(actionListener);
+	}
+	
+	public void addPutBankAction(ActionListener actionListener) {
+		putbankItem.addActionListener(actionListener);
 	}
 	
 	public void setImageString(String imageString) {

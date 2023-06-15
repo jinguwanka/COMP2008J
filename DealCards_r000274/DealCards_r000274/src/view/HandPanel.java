@@ -29,10 +29,7 @@ public class HandPanel extends JPanel {
 	public HandPanel(Player player) {
 		setPreferredSize(new Dimension(10, 150));
 		this.player=player;
-		
-		
 		setLayout(null);
-		
 
 	}
 	
@@ -44,7 +41,7 @@ public class HandPanel extends JPanel {
 				string="back/back.jpg";
 			}
 			ImagePanel imagePanel=new ImagePanel(string);
-			
+			imagePanel.setCard(cards.get(i));
 			imagePanel.setLocation(i*20, 0);
 			if (!(player instanceof Cpu)) {
 				Card card=cards.get(i);
@@ -52,6 +49,7 @@ public class HandPanel extends JPanel {
 				setPreferredSize(new Dimension(80*i+80+20, 120));
 				imagePanel.displayPopMenu();
 				imagePanel.addMenuAction(e->{player.dealCard(card);});
+				imagePanel.addPutBankAction(e->player.putInBank(card));
 			}
 			add(imagePanel);
 		}
