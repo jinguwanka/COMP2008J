@@ -1,20 +1,24 @@
 package DealCard;
 
-public class ActionCard extends Card {
+public class ActionCard extends Card{
 
-    private String name;
+	private String name;
+	public ActionCard(String name, int value, int maxNum) {
+		super(null, value, maxNum);
+		// TODO Auto-generated constructor stub
+		this.name=name;
+	}
+	
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return name;
+	}
+	
+	@Override
+	public String imageString() {
+		// TODO Auto-generated method stub
+		return "ActionCards/"+name+".jpg";
+	}
 
-    public ActionCard(String name, int value, int maxNum) {
-        super(null, value, maxNum);
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    // Returns the image path for the ActionCard
-    public String imageString() {
-        return "ActionCards/" + name + ".jpg";
-    }
 }
